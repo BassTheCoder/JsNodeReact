@@ -4,6 +4,11 @@ const cors = require('cors')
 const app = express();
 const mysql = require('mysql');
 
+
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     port: '3306',
@@ -17,10 +22,6 @@ connection.connect(function (err) {
     console.log("Connected to database!");
 });
 
-app.use(express.json());
-app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
-
 app.post('/api/submitReview', (req, res) => {
 
     const restaurantName = req.body.restaurantName
@@ -32,8 +33,6 @@ app.post('/api/submitReview', (req, res) => {
         console.log(result)
     })
 });
-
-
 
 app.listen(5000, () => {
     console.log("server started on port 5000.");

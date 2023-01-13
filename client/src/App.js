@@ -9,10 +9,10 @@ function App() {
   const [restaurantReview, setRestaurantReview] = useState('');
 
   const submitReview = () => {
-    Axios.post('http://localhost:5000/api/submitReview', { 
-      restaurantName: restaurantName, 
-      restaurantRating: restaurantRating, 
-      restaurantReview: restaurantReview 
+    Axios.post('http://localhost:5000/api/submitReview', {
+      restaurantName: restaurantName,
+      restaurantRating: restaurantRating,
+      restaurantReview: restaurantReview
     }).then(() => {
       alert('A review was successfully submitted.')
     })
