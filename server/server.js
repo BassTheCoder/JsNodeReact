@@ -30,6 +30,17 @@ app.get('/api/reviews/all', (req, res) => {
     })
 })
 
+app.get('/api/reviews/restaurant/all', (req, res) => {
+
+    const restaurant = req.headers.restaurant
+    console.log('Getting reviews for ' + restaurant)
+
+    const selectQuery = "SELECT * FROM food_io.restaurant_reviews where restaurant_name = ?"
+    connection.query(selectQuery, [restaurant], function (err, result) {
+        res.send(result)
+    })
+})
+
 app.get('/api/reviews/highlight', (req, res) => {
     
     const selectQuery = "SELECT * FROM food_io.restaurant_reviews WHERE restaurant_rating = '5' ORDER BY id DESC LIMIT 1;"
