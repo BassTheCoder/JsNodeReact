@@ -97,7 +97,7 @@ function App() {
         <div class="row justify-content-md-center">
         <div class="col-md-5">
           <div class="jumbotron text-center align-items-center text-white ">
-            <h1 class="display-4">Ratings</h1>
+            <h1 class="display-4">Find local restaurants</h1>
             <p class="lead">Choose your city to find the best places to eat.</p>
 			
 			
@@ -105,7 +105,7 @@ function App() {
           <div class="form-group mb-3">
                     <input class="form-control mb-3" placeholder="City" type="text" id="city" data-sb-validations="required" required onChange={(e) => { setCity(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
-                    </div>
+          </div>
             <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByCity}>Find best food</button></div>
           </form>
 			
@@ -113,9 +113,25 @@ function App() {
           </div>
           </div>
         </div>
+
+        
+        <div class="container py-5 px-lg-5 ">
+        <div class="row justify-content-md-center">
+        <div class="col-md-5">
+        <div class="jumbotron text-center align-items-center text-white ">
+        <h1 class="display-4">Highlight Review</h1>
+        <blockquote class="blockquote text-center">
+  <p class="mb-3">Best borgar I ever had.</p>
+  <footer class="blockquote-footer">Restaurant name, <cite title="Source Title">City</cite></footer>
+</blockquote>
+        </div>
+        </div>
+          </div>
+          </div>
         </section>
 
         <footer class="py-3">
+          
           <div class="container px-4 px-lg-5">
             <div class="small text-center text-muted">Copyright &copy; 2023 - food.io
             </div>
