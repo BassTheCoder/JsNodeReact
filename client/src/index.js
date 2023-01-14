@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import $ from 'jquery';
 import Popper from 'popper.js';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 
 
@@ -18,6 +19,7 @@ root.render(
   <React.StrictMode>
     <Navbar />
     <App />
+    <Footer />
   </React.StrictMode>
 );
 

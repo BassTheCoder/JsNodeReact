@@ -3,9 +3,9 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 
-import Home from './Views/Home/Home';
-import About from './Views/About/About';
-import CityView from './Views/CityView/CityView';
+import Home from './Views/Home';
+import About from './Views/About';
+import CityView from './Views/CityView';
 
 function App() {
 
