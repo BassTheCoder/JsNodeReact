@@ -9,6 +9,7 @@ function App() {
   const [restaurantReview, setRestaurantReview] = useState('noreview');
   const [restaurantCity, setRestaurantCity] = useState('nocity');
   const [city, setCity] = useState('nocity');
+  const [cityRestaurants, setCityRestaurants] = useState({});
   const [highlight, setHighlight] = useState({});
 
   const submitReview = () => {
@@ -23,18 +24,22 @@ function App() {
   };
 
   const searchByCity = () => {
-    axios.get('/http://localhost:5000/api/reviews/city', {
-      params: {
-        city: city
-      }
-    })
-  }
+    axios.get('http://localhost:5000/api/reviews/city', {
+        headers: {
+          city: `${city}` 
+        }
+      }).then((response) => {
+        setCityRestaurants(response.data); 
+      })
+  } 
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/reviews/highlight').then((response) => {
       setHighlight(response.data[0]);
     })
   }, [])
+
+
 
 
   return (
@@ -117,21 +122,21 @@ function App() {
           </div>
         </div>
 
-        
-          <div class="container py-5 px-lg-5 ">
-            <div class="row justify-content-md-center">
-              <div class="col-md-5">
-                <div class="jumbotron text-center align-items-center text-white ">
-                  <h1 class="display-4">Highlight Review</h1>
-                  <blockquote class="blockquote text-center">
-                    <p class="mb-3">{highlight.restaurant_review}</p>
-                    <footer class="blockquote-footer">{highlight.restaurant_name}, <cite title="Source Title">{highlight.restaurant_city}</cite></footer>
-                  </blockquote>
-                </div>
+
+        <div class="container py-5 px-lg-5 ">
+          <div class="row justify-content-md-center">
+            <div class="col-md-5">
+              <div class="jumbotron text-center align-items-center text-white ">
+                <h1 class="display-4">Highlight Review</h1>
+                <blockquote class="blockquote text-center">
+                  <p class="mb-3">{highlight.restaurant_review}</p>
+                  <footer class="blockquote-footer">{highlight.restaurant_name}, <cite title="Source Title">{highlight.restaurant_city}</cite></footer>
+                </blockquote>
               </div>
             </div>
           </div>
-        
+        </div>
+
       </section>
 
       <footer class="py-3">
