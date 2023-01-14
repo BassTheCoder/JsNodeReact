@@ -41,11 +41,10 @@ app.get('/api/reviews/highlight', (req, res) => {
 app.get('/api/reviews/city', (req, res) => {
     
     const city = req.headers.city
-    console.log(city)
+    console.log('Getting restaurants in ' + city)
 
-    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) FROM food_io.restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
+    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) as 'average_rating' FROM food_io.restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
     connection.query(selectQuery, [city], function (err, result) {
-        console.log(result)
         res.send(result)
     })
 })

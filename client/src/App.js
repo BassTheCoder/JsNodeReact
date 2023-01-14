@@ -11,6 +11,7 @@ function App() {
   const [city, setCity] = useState('nocity');
   const [cityRestaurants, setCityRestaurants] = useState({});
   const [highlight, setHighlight] = useState({});
+  const [reviews, setReviews] = useState({});
 
   const submitReview = () => {
     axios.post('http://localhost:5000/api/submitReview', {
@@ -25,17 +26,23 @@ function App() {
 
   const searchByCity = () => {
     axios.get('http://localhost:5000/api/reviews/city', {
-        headers: {
-          city: `${city}` 
-        }
-      }).then((response) => {
-        setCityRestaurants(response.data); 
-      })
-  } 
+      headers: {
+        city: `${city}`
+      }
+    }).then((response) => {
+      setCityRestaurants(response.data);
+    })
+  }
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/reviews/highlight').then((response) => {
       setHighlight(response.data[0]);
+    })
+  }, [])
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/reviews/all').then((response) => {
+      setReviews(response.data[0]);
     })
   }, [])
 
