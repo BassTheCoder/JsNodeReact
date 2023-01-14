@@ -35,7 +35,7 @@ function App() {
 
         <nav class="navbar navbar-expand-lg navbar-light  py-3 ">
           <div class="container px-4 px-lg-5 ">
-            <a class="navbar-brand text-white" href="#page-top">Food.io</a>
+            <a class="navbar-brand text-white" href="#page-top">food.io</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
@@ -80,7 +80,7 @@ function App() {
                   <textarea class="form-control" placeholder="Review" id="review" rows="5" data-sb-validations="required" required onChange={(e) => { setRestaurantReview(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="review:required">A review is required.</div>
                   </div>
-                  <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={submitReview}>Submit your rating</button></div>
+                  <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={submitReview}>Submit your review</button></div>
 
                 </form>
 			
@@ -113,7 +113,7 @@ function App() {
 
         <footer class="py-3">
           <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2023 - Food.io
+            <div class="small text-center text-muted">Copyright &copy; 2023 - food.io
             </div>
           </div>
         </footer>
