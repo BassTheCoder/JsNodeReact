@@ -7,14 +7,23 @@ function App() {
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantRating, setRestaurantRating] = useState('');
   const [restaurantReview, setRestaurantReview] = useState('');
+  const [restaurantCity, setRestaurantCity] = useState('');
+  const [city, setCity] = useState('');
 
   const submitReview = () => {
     Axios.post('http://localhost:5000/api/submitReview', {
       restaurantName: restaurantName,
       restaurantRating: restaurantRating,
-      restaurantReview: restaurantReview
+      restaurantReview: restaurantReview,
+      restaurantCity: restaurantCity
     }).then(() => {
       alert('A review was successfully submitted.')
+    })
+  };
+
+  const searchByCity = () => {
+    Axios.post('http://localhost:5000/api/reviews/city', {
+      city: city
     })
   };
 
@@ -39,20 +48,22 @@ function App() {
         </nav>
 
         <section class="page-section mb-5" id="ratings">
-          <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-lg-8 col-xl-6 text-center">
-                <h2 class="mt-0 text-white">Rate a restaurant</h2>
-                <hr class="divider" />
-
-                <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
+        <div class="container py-5 px-lg-5">
+          <div class="jumbotron text-center align-items-center text-white ">
+            <h1 class="display-4">Leave a review</h1>
+            <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
                   <div class="form-group mb-3">
-                    <input class="form-control mb-3" placeholder="Restaurant name" type="text" id="name" data-sb-validations="required" onChange={(e) => { setRestaurantName(e.target.value) }} />
+                    <input class="form-control mb-3" placeholder="Restaurant name" type="text" id="name" data-sb-validations="required" required onChange={(e) => { setRestaurantName(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                   </div>
 
                   <div class="form-group mb-3">
-                    <select class="form-select" id="rating" onChange={(e) => { setRestaurantRating(e.target.value) }}>
+                    <input class="form-control mb-3" placeholder="City" type="text" id="city" data-sb-validations="required" required onChange={(e) => { setRestaurantCity(e.target.value) }} />
+                    <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <select class="form-select" id="rating" required onChange={(e) => { setRestaurantRating(e.target.value) }}>
                       <option value="" disabled selected>Select your rating</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -62,17 +73,35 @@ function App() {
                     </select>
                   </div>
 
-                  <div>
-                    <input class="form-control mb-3" placeholder="Restaurant review" type="text" id="review" data-sb-validations="required" onChange={(e) => { setRestaurantReview(e.target.value) }} />
+                  <div class="form-group mb-3">
+                  <textarea class="form-control" placeholder="Review" id="review" rows="3" data-sb-validations="required" required onChange={(e) => { setRestaurantReview(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="review:required">A review is required.</div>
                   </div>
                   <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={submitReview}>Submit your rating</button></div>
 
                 </form>
-                <hr class="divider" />
-              </div>
-            </div>
+			
+			
           </div>
+        </div>
+
+        <div class="container py-5 px-lg-5 ">
+          <div class="jumbotron text-center align-items-center text-white ">
+            <h1 class="display-4">Ratings</h1>
+            <p class="lead">Choose your city to find the best places to eat.</p>
+			
+			
+			<form id="searchForm" data-sb-form-api-token="API_TOKEN">
+			<div class="form-group mb-3">
+                <input class="form-control mb-3" placeholder="City" type="text" id="city" data-sb-validations="required" required onChange={(e) => { setCity(e.target.value) }} />
+                <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
+                </div>
+				<div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByCity}>Find best food</button></div>
+			</form>
+			
+			
+          </div>
+        </div>
         </section>
 
         <footer class="py-3">
