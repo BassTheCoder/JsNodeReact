@@ -9,6 +9,7 @@ function App() {
   const [restaurantReview, setRestaurantReview] = useState('');
   const [restaurantCity, setRestaurantCity] = useState('');
   const [city, setCity] = useState('');
+  const [highlight, setHighlight] = useState({});
 
   const submitReview = () => {
     Axios.post('http://localhost:5000/api/submitReview', {
@@ -22,43 +23,43 @@ function App() {
   };
 
   const searchByCity = () => {
-    Axios.get('http://localhost:5000/api/reviews/city', {
+    Axios.get('/http://localhost:5000/api/reviews/city', {
       city: city
     })
-  };
+  }
 
   useEffect(() => {
-    Axios.get('http://localhost:5000/api/reviews/all').then((response) => {
-      console.log(response.data);
+    Axios.get('http://localhost:5000/api/reviews/highlight').then((response) => {
+      setHighlight(response.data);
     })
   }, [])
 
 
   return (
 
-      <body>
-        <nav class="navbar navbar-expand-lg navbar-light  py-3 ">
-          <div class="container px-4 px-lg-5 ">
-            <a class="navbar-brand text-white" href="#page-top">food.io</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#ratings">Ratings</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
-              </ul>
-            </div>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-light  py-3 ">
+        <div class="container px-4 px-lg-5 ">
+          <a className="navbar-brand text-white" href="#page-top">food.io</a>
+          <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+              <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#ratings">Ratings</a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
+            </ul>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        <section class="page-section mb-5" id="ratings">
+      <section class="page-section mb-5" id="ratings">
         <div class="container py-5 px-lg-5">
-        <div class="row justify-content-md-center">
-        <div class="col col-lg-5">
-          <div class="jumbotron text-center align-items-center text-white ">
-            <h1 class="display-4">Leave a review</h1>
-            <p class="lead">Found a good place to eat? Share it with us!</p>
-            <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-5">
+              <div class="jumbotron text-center align-items-center text-white ">
+                <h1 class="display-4">Leave a review</h1>
+                <p class="lead">Found a good place to eat? Share it with us!</p>
+                <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
                   <div class="form-group mb-3">
                     <input class="form-control mb-3" placeholder="Restaurant name" type="text" id="name" data-sb-validations="required" required onChange={(e) => { setRestaurantName(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
@@ -81,63 +82,64 @@ function App() {
                   </div>
 
                   <div class="form-group mb-3">
-                  <textarea class="form-control" placeholder="Review" id="review" rows="5" data-sb-validations="required" required onChange={(e) => { setRestaurantReview(e.target.value) }} />
+                    <textarea class="form-control" placeholder="Review" id="review" rows="5" data-sb-validations="required" required onChange={(e) => { setRestaurantReview(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="review:required">A review is required.</div>
                   </div>
                   <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={submitReview}>Submit your review</button></div>
 
                 </form>
-			
+
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
         <div class="container py-5 px-lg-5 ">
-        <div class="row justify-content-md-center">
-        <div class="col-md-5">
-          <div class="jumbotron text-center align-items-center text-white ">
-            <h1 class="display-4">Find local restaurants</h1>
-            <p class="lead">Choose your city to find the best places to eat.</p>
-			
-			
-          <form id="searchForm" data-sb-form-api-token="API_TOKEN">
-          <div class="form-group mb-3">
+          <div class="row justify-content-md-center">
+            <div class="col-md-5">
+              <div class="jumbotron text-center align-items-center text-white ">
+                <h1 class="display-4">Find local restaurants</h1>
+                <p class="lead">Choose your city to find the best places to eat.</p>
+
+
+                <form id="searchForm" data-sb-form-api-token="API_TOKEN">
+                  <div class="form-group mb-3">
                     <input class="form-control mb-3" placeholder="City" type="text" id="city" data-sb-validations="required" required onChange={(e) => { setCity(e.target.value) }} />
                     <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
-          </div>
-            <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByCity}>Find best food</button></div>
-          </form>
-			
-          </div>
-          </div>
-          </div>
-        </div>
+                  </div>
+                  <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByCity}>Find best food</button></div>
+                </form>
 
-        
-        <div class="container py-5 px-lg-5 ">
-        <div class="row justify-content-md-center">
-        <div class="col-md-5">
-        <div class="jumbotron text-center align-items-center text-white ">
-        <h1 class="display-4">Highlight Review</h1>
-        <blockquote class="blockquote text-center">
-  <p class="mb-3">Best borgar I ever had.</p>
-  <footer class="blockquote-footer">Restaurant name, <cite title="Source Title">City</cite></footer>
-</blockquote>
-        </div>
-        </div>
-          </div>
-          </div>
-        </section>
-
-        <footer class="py-3">
-          
-          <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">Copyright &copy; 2023 - food.io
+              </div>
             </div>
           </div>
-        </footer>
-      </body>
+        </div>
+
+        {highlight &&
+          <div class="container py-5 px-lg-5 ">
+            <div class="row justify-content-md-center">
+              <div class="col-md-5">
+                <div class="jumbotron text-center align-items-center text-white ">
+                  <h1 class="display-4">Highlight Review</h1>
+                  <blockquote class="blockquote text-center">
+                    <p class="mb-3">{highlight.restaurant_review}</p>
+                    <footer class="blockquote-footer">{highlight.restaurant_name}, <cite title="Source Title">{highlight.restaurant_city}</cite></footer>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </section>
+
+      <footer class="py-3">
+
+        <div class="container px-4 px-lg-5">
+          <div class="small text-center text-muted">Copyright &copy; 2023 - food.io - Piotr Narożny & Patryk Nowak
+          </div>
+        </div>
+      </footer>
+    </body>
   );
 }
 

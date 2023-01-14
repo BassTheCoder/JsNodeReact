@@ -26,7 +26,14 @@ app.get('/api/reviews/all', (req, res) => {
     
     const selectQuery = "SELECT * FROM food_io.restaurant_reviews"
     connection.query(selectQuery, function (err, result) {
-        console.log(result)
+        res.send(result)
+    })
+})
+
+app.get('/api/reviews/highlight', (req, res) => {
+    
+    const selectQuery = "SELECT * FROM food_io.restaurant_reviews WHERE restaurant_rating = '5' ORDER BY id DESC LIMIT 1;"
+    connection.query(selectQuery, function (err, result) {
         res.send(result)
     })
 })
@@ -35,7 +42,7 @@ app.get('/api/reviews/city', (req, res) => {
     
     const city = req.body.city
 
-    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) FROM restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
+    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) FROM food_io.restaurant_reviews WHERE restaurant_city = (?) GROUP BY restaurant_name;"
     connection.query(selectQuery, [city], function (err, result) {
         console.log(result)
         res.send(result)
