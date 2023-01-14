@@ -22,14 +22,23 @@ connection.connect(function (err) {
     console.log("Connected to database!");
 });
 
+app.get('/api/reviews/all', (req, res) => {
+    
+    const selectQuery = "SELECT * FROM food_io.restaurant_reviews"
+    connection.query(selectQuery, function (err, result) {
+        console.log(result);
+    })
+})
+
 app.post('/api/submitReview', (req, res) => {
 
     const restaurantName = req.body.restaurantName
+    const restaurantCity = req.body.restaurantCity
     const restaurantRating = req.body.restaurantRating
     const restaurantReview = req.body.restaurantReview
 
-    const insertQuery = "INSERT INTO food_io.restaurant_reviews (restaurant_name, restaurant_rating, restaurant_review) VALUES (?,?,?);"
-    connection.query(insertQuery, [restaurantName, restaurantRating, restaurantReview], function (err, result) {
+    const insertQuery = "INSERT INTO food_io.restaurant_reviews (restaurant_name, restaurant_city, restaurant_rating, restaurant_review) VALUES (?,?,?,?);"
+    connection.query(insertQuery, [restaurantName, restaurantCity, restaurantRating, restaurantReview], function (err, result) {
         console.log(result)
     })
 });
