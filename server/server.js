@@ -30,6 +30,16 @@ app.get('/api/reviews/all', (req, res) => {
     })
 })
 
+app.get('/api/reviews/city', (req, res) => {
+    
+    const city = req.body.city
+
+    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) FROM restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
+    connection.query(selectQuery, [city], function (err, result) {
+        console.log(result);
+    })
+})
+
 app.post('/api/submitReview', (req, res) => {
 
     const restaurantName = req.body.restaurantName
