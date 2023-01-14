@@ -6,8 +6,10 @@ export default function Navbar() {
                 <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link text-white" href="/about">About</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" href="/ratings">Ratings</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/reviews/add">Add review</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/reviews/restaurant">Search restaurant</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/reviews/restaurants/city">Local restaurants</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="/about">About us</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact</a></li>
                     </ul>
                 </div>

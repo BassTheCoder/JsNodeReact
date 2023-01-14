@@ -23,7 +23,7 @@ connection.connect(function (err) {
 });
 
 app.get('/api/reviews/all', (req, res) => {
-    
+
     const selectQuery = "SELECT * FROM food_io.restaurant_reviews"
     connection.query(selectQuery, function (err, result) {
         res.send(result)
@@ -35,14 +35,14 @@ app.get('/api/reviews/restaurant/all', (req, res) => {
     const restaurant = req.headers.restaurant
     console.log('Getting reviews for ' + restaurant)
 
-    const selectQuery = "SELECT * FROM food_io.restaurant_reviews where restaurant_name = ?"
+    const selectQuery = "SELECT * FROM food_io.restaurant_reviews where restaurant_name = ? ORDER BY id DESC"
     connection.query(selectQuery, [restaurant], function (err, result) {
         res.send(result)
     })
 })
 
 app.get('/api/reviews/highlight', (req, res) => {
-    
+
     const selectQuery = "SELECT * FROM food_io.restaurant_reviews WHERE restaurant_rating = '5' ORDER BY id DESC LIMIT 1;"
     connection.query(selectQuery, function (err, result) {
         res.send(result)
@@ -50,11 +50,11 @@ app.get('/api/reviews/highlight', (req, res) => {
 })
 
 app.get('/api/reviews/city', (req, res) => {
-    
+
     const city = req.headers.city
     console.log('Getting restaurants in ' + city)
 
-    const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) as 'average_rating' FROM food_io.restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
+    const selectQuery = "SELECT restaurant_name, ROUND(avg(restaurant_rating), 1) as 'average_rating', count(*) as 'review_count' FROM food_io.restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name ORDER BY avg(restaurant_rating) DESC;"
     connection.query(selectQuery, [city], function (err, result) {
         res.send(result)
     })
@@ -73,6 +73,17 @@ app.post('/api/submitReview', (req, res) => {
         res.send(result)
     })
 });
+
+app.post('/api/reviews/delete', (req, res) => {
+
+    const id = req.headers.id
+    console.log(id)
+    const deleteQuery = "DELETE FROM food_io.restaurant_reviews WHERE id = ?"
+    connection.query(deleteQuery, [id], function (err, result) {
+        console.log(result)
+        res.send(result)
+    })
+})
 
 app.listen(5000, () => {
     console.log("server started on port 5000.");
