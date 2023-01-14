@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Axios from 'axios'
+import Axios from 'axios';
 
 function App() {
 
@@ -27,12 +27,16 @@ function App() {
     })
   };
 
+  useEffect(() => {
+    Axios.get('http://localhost:5000/api/reviews/all').then((response) => {
+      console.log(response.data);
+    })
+  }, [])
+
 
   return (
 
-    <>
       <body>
-
         <nav class="navbar navbar-expand-lg navbar-light  py-3 ">
           <div class="container px-4 px-lg-5 ">
             <a class="navbar-brand text-white" href="#page-top">food.io</a>
@@ -117,9 +121,7 @@ function App() {
             </div>
           </div>
         </footer>
-
       </body>
-    </>
   );
 }
 
