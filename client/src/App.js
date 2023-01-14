@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Axios from 'axios';
+import axios from 'axios';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
   const [highlight, setHighlight] = useState({});
 
   const submitReview = () => {
-    Axios.post('http://localhost:5000/api/submitReview', {
+    axios.post('http://localhost:5000/api/submitReview', {
       restaurantName: restaurantName,
       restaurantRating: restaurantRating,
       restaurantReview: restaurantReview,
@@ -23,14 +23,16 @@ function App() {
   };
 
   const searchByCity = () => {
-    Axios.get('/http://localhost:5000/api/reviews/city', {
-      city: city
+    axios.get('/http://localhost:5000/api/reviews/city', {
+      params: {
+        city: city
+      }
     })
   }
 
   useEffect(() => {
-    Axios.get('http://localhost:5000/api/reviews/highlight').then((response) => {
-      setHighlight(response.data);
+    axios.get('http://localhost:5000/api/reviews/highlight').then((response) => {
+      setHighlight(response.data[0]);
     })
   }, [])
 
