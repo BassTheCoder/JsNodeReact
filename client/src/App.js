@@ -22,7 +22,7 @@ function App() {
   };
 
   const searchByCity = () => {
-    Axios.post('http://localhost:5000/api/reviews/city', {
+    Axios.get('http://localhost:5000/api/reviews/city', {
       city: city
     })
   };

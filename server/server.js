@@ -26,7 +26,8 @@ app.get('/api/reviews/all', (req, res) => {
     
     const selectQuery = "SELECT * FROM food_io.restaurant_reviews"
     connection.query(selectQuery, function (err, result) {
-        console.log(result);
+        console.log(result)
+        res.send(result)
     })
 })
 
@@ -36,7 +37,8 @@ app.get('/api/reviews/city', (req, res) => {
 
     const selectQuery = "SELECT restaurant_name, avg(restaurant_rating) FROM restaurant_reviews WHERE restaurant_city = ? GROUP BY restaurant_name;"
     connection.query(selectQuery, [city], function (err, result) {
-        console.log(result);
+        console.log(result)
+        res.send(result)
     })
 })
 
@@ -50,6 +52,7 @@ app.post('/api/submitReview', (req, res) => {
     const insertQuery = "INSERT INTO food_io.restaurant_reviews (restaurant_name, restaurant_city, restaurant_rating, restaurant_review) VALUES (?,?,?,?);"
     connection.query(insertQuery, [restaurantName, restaurantCity, restaurantRating, restaurantReview], function (err, result) {
         console.log(result)
+        res.send(result)
     })
 });
 
