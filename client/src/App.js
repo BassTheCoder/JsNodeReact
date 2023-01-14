@@ -4,11 +4,11 @@ import Axios from 'axios';
 
 function App() {
 
-  const [restaurantName, setRestaurantName] = useState('');
-  const [restaurantRating, setRestaurantRating] = useState('');
-  const [restaurantReview, setRestaurantReview] = useState('');
-  const [restaurantCity, setRestaurantCity] = useState('');
-  const [city, setCity] = useState('');
+  const [restaurantName, setRestaurantName] = useState('noname');
+  const [restaurantRating, setRestaurantRating] = useState('0');
+  const [restaurantReview, setRestaurantReview] = useState('noreview');
+  const [restaurantCity, setRestaurantCity] = useState('nocity');
+  const [city, setCity] = useState('nocity');
   const [highlight, setHighlight] = useState({});
 
   const submitReview = () => {
@@ -115,7 +115,7 @@ function App() {
           </div>
         </div>
 
-        {highlight &&
+        
           <div class="container py-5 px-lg-5 ">
             <div class="row justify-content-md-center">
               <div class="col-md-5">
@@ -129,7 +129,7 @@ function App() {
               </div>
             </div>
           </div>
-        }
+        
       </section>
 
       <footer class="py-3">
