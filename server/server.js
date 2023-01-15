@@ -74,7 +74,7 @@ app.post('/api/submitReview', (req, res) => {
     })
 });
 
-app.post('/api/reviews/delete', (req, res) => {
+app.delete('/api/reviews/delete', (req, res) => {
 
     const id = req.headers.id
     console.log(id)

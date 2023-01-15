@@ -16,8 +16,8 @@ export default function AdminView() {
         })
     }
 
-    function deleteReview(id) {
-        axios.post('http://localhost:5000/api/reviews/delete', {
+    const deleteReview = (id) => {
+        axios.delete('http://localhost:5000/api/reviews/delete', {
             headers: {
                 id: id
             }
@@ -62,13 +62,13 @@ export default function AdminView() {
                             <div class="row justify-content-md-center">
                                 <div class="col-md-5">
                                     <div class="jumbotron text-center align-items-center text-white ">
-                                        <form onSubmit={handleSubmit} id="reviewAdminForm" data-sb-form-api-token="API_TOKEN">
+                                        <form id="reviewAdminForm" data-sb-form-api-token="API_TOKEN">
                                             <h1 class="display-4">{val.restaurant_rating}/5</h1>
                                             <blockquote class="blockquote text-center">
                                                 <p class="mb-3">{val.restaurant_review}</p>
                                                 <footer class="blockquote-footer"><cite title="Source Title">{val.restaurant_city}</cite></footer>
                                             </blockquote>
-                                            <button class="btn btn-danger btn-xl" id="submitDeleteButton" type="submit" onClick={deleteReview}>DELETE</button>
+                                            <button class="btn btn-danger btn-xl" id="submitDeleteButton" type="submit" onClick={() => {deleteReview(val.id)}}>DELETE</button>
                                         </form>
                                     </div>
                                 </div>
