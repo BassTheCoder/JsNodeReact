@@ -85,6 +85,21 @@ app.delete('/api/reviews/delete', (req, res) => {
     })
 })
 
+app.put('/api/reviews/update', (req, res) => {
+
+    const id = req.body.id
+    const restaurantName = req.body.restaurantName
+    const restaurantCity = req.body.restaurantCity
+    const restaurantRating = req.body.restaurantRating
+    const restaurantReview = req.body.restaurantReview
+
+    const insertQuery = "UPDATE food_io.restaurant_reviews SET restaurant_name = ?, restaurant_city = ?, restaurant_rating = ?, restaurant_review = ? WHERE id = ?;"
+    connection.query(insertQuery, [restaurantName, restaurantCity, restaurantRating, restaurantReview, id], function (err, result) {
+        console.log(result)
+        res.send(result)
+    })
+})
+
 app.listen(5000, () => {
     console.log("server started on port 5000.");
 });

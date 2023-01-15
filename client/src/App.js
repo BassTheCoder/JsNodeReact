@@ -10,6 +10,7 @@ import CityView from './Views/CityView';
 import RestaurantReviewsView from "./Views/RestaurantReviews";
 import AdminView from "./Views/AdminView";
 import AddReviewView from "./Views/AddReview";
+import EditReviewView from "./Views/EditView";
 import NoMatch from "./Views/NoMatch";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reviews/add" element={<AddReviewView />} />
+          <Route path="/review/edit" element={<EditReviewView />} />
           <Route path="/reviews/restaurants/city" element={<CityView />} />
           <Route path="/reviews/restaurant" element={<RestaurantReviewsView />} />
           <Route path="/admin" element={<AdminView />} />

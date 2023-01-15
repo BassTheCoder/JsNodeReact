@@ -31,7 +31,7 @@ export default function AddReviewView() {
                     <div class="jumbotron text-center align-items-center text-white ">
                         <h1 class="display-4">Leave a review</h1>
                         <p class="lead">Found a good place to eat? Share it with us!</p>
-                        <form onSubmit={handleSubmit} id="ratingsForm" data-sb-form-api-token="API_TOKEN">
+                        <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
                             <div class="form-group mb-3">
                                 <input class="form-control mb-3" placeholder="Restaurant name" type="text" id="name" data-sb-validations="required" required onChange={(e) => { setRestaurantName(e.target.value) }} />
                                 <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>

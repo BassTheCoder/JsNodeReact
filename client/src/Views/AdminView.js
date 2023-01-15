@@ -26,7 +26,6 @@ export default function AdminView() {
         })
     };
 
-
     const handleSubmit = event => {
         event.preventDefault();
         console.log('form submitted');
@@ -40,14 +39,12 @@ export default function AdminView() {
                         <div class="jumbotron text-center align-items-center text-white ">
                             <h1 class="display-4">Find all reviews for a restaurant</h1>
                             <p class="lead">Choose restaurant to find reviews of.</p>
-
-
                             <form onSubmit={handleSubmit} target="_self" id="searchForm" data-sb-form-api-token="API_TOKEN">
                                 <div class="form-group mb-3">
                                     <input class="form-control mb-3" placeholder="Restaurant" type="text" id="restaurant" data-sb-validations="required" required onChange={(e) => { setRestaurantName(e.target.value) }} />
                                     <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
                                 </div>
-                                <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByRestaurant}>Find best food</button></div>
+                                <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={searchByRestaurant}>Find reviews</button></div>
                             </form>
 
                         </div>
@@ -55,7 +52,7 @@ export default function AdminView() {
                 </div>
             </div>
 
-            <div>   
+            <div>
                 {restaurantReviews.map((val) => {
                     return (
                         <div class="container py-3 px-lg-5 ">
@@ -68,8 +65,9 @@ export default function AdminView() {
                                                 <p class="mb-3">{val.restaurant_review}</p>
                                                 <footer class="blockquote-footer"><cite title="Source Title">{val.restaurant_city}</cite></footer>
                                             </blockquote>
-                                            <button class="btn btn-danger btn-xl" id="submitDeleteButton" type="submit" onClick={() => {deleteReview(val.id)}}>DELETE</button>
+                                            <button class="btn btn-danger btn-xl" id="submitDeleteButton" type="submit" onClick={() => { deleteReview(val.id) }}>DELETE</button>
                                         </form>
+                                        <a href='/review/edit'><button class="btn btn-info btn-xl">EDIT</button></a>
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+export default function EditReviewView(props) {
+
+    let id = props.id;
+
+    const [restaurantName, setRestaurantName] = useState('noname');
+    const [restaurantRating, setRestaurantRating] = useState('0');
+    const [restaurantReview, setRestaurantReview] = useState('noreview');
+    const [restaurantCity, setRestaurantCity] = useState('nocity');
+
+    const editReview = () => {
+        axios.put('http://localhost:5000/api/reviews/update', {
+            id: id,
+            restaurantName: restaurantName,
+            restaurantRating: restaurantRating,
+            restaurantReview: restaurantReview,
+            restaurantCity: restaurantCity
+        }).then(() => {
+            alert('A review was successfully submitted.')
+        })
+    };
+
+    return (
+        <div>
+            <div class="container py-5 px-lg-5">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-12">
+                        <div class="jumbotron text-center align-items-center text-white ">
+                            <h2 class="display-5">i wish this worked...</h2>
+                            <p class="text-muted">badly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container py-5 px-lg-5">
+                <div class="row justify-content-md-center">
+                    <div class="col col-lg-5">
+                        <div class="jumbotron text-center align-items-center text-white ">
+                            <h1 class="display-4">Edit a review</h1>
+                            <form id="ratingsForm" data-sb-form-api-token="API_TOKEN">
+                                <div class="form-group mb-3">
+                                    <input class="form-control mb-3" placeholder="Restaurant name" type="text" id="name" data-sb-validations="required" required onChange={(e) => { setRestaurantName(e.target.value) }} />
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <input class="form-control mb-3" placeholder="City" type="text" id="city" data-sb-validations="required" required onChange={(e) => { setRestaurantCity(e.target.value) }} />
+                                    <div class="invalid-feedback" data-sb-feedback="city:required">A city is required.</div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <select class="form-select" id="rating" required onChange={(e) => { setRestaurantRating(e.target.value) }}>
+                                        <option value="" disabled selected>Select rating</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <textarea class="form-control" placeholder="Review" id="review" rows="5" data-sb-validations="required" required onChange={(e) => { setRestaurantReview(e.target.value) }} />
+                                    <div class="invalid-feedback" data-sb-feedback="review:required">A review is required.</div>
+                                </div>
+                                <div class="d-grid"><button class="btn btn-primary btn-xl" id="submitButton" type="submit" onClick={editReview}>Edit this review</button></div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
