@@ -19,11 +19,6 @@ export default function AddReviewView() {
         })
     };
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        console.log('form submitted');
-    }
-
     return (
         <div class="container py-5 px-lg-5">
             <div class="row justify-content-md-center">
