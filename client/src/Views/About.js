@@ -7,7 +7,8 @@ export default function About() {
             <div class="col-md-12">
               <div class="jumbotron text-center align-items-center text-white ">
                 <h1 class="display-1">about us</h1>
-                <h2 class="display-5">we are two GIGACHADS with GIGACUM</h2>
+                <h2 class="display-5">we're just two handsome students who want to pass javascript...</h2>
+                <p class="text-muted">badly.</p>
               </div>
             </div>
           </div>
