@@ -33,8 +33,8 @@ const HomeView = () => {
               <div class="jumbotron text-center align-items-center text-white ">
                 <p class="display-4">Latest 5/5 review</p>
                 <blockquote class="blockquote text-center reviewexample">
-                  <p class="mb-3">{highlight.restaurant_review}</p>
-                  <footer class="blockquote-footer">{highlight.restaurant_name}, <cite title="Source Title">{highlight.restaurant_city}</cite></footer>
+                  <p class="mb-3">{highlight && highlight.restaurant_review}</p>
+                  <footer class="blockquote-footer">{highlight && highlight.restaurant_name}, <cite title="Source Title">{highlight && highlight.restaurant_city}</cite></footer>
                 </blockquote>
               </div>
             </div>
